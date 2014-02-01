@@ -1,0 +1,8 @@
+extends layout
+
+block content
+    h1= title
+    form(method='POST', action='/ingredient/create', id='newIngredient')
+        input(type='text', name='ingredientName', placeholder='name')
+        input(type='number', name='ingredientPrice', placeholder='price')
+        input(type='submit')
