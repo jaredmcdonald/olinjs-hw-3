@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    h1= title
+    each order, i in orders
+        if (!order.complete)
+            div.order
+                p= 'Name: ' + order.name
+                p= 'Ingredients:'
+                ul
+                    each ingredient, j in order.ingredients
+                        li= ingredient.name + ' (' + ingredient.price + ')'
+                button.complete(data-orderid='#{order._id}')= 'Complete Order'
+    script(src='/js/order/list.js')

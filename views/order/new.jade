@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+    h1= title
+    form(method='POST', action='/order/create', id='newOrder')
+        input(type='text', name='customerName', id='customerName', placeholder='Your Name')
+        fieldset(name='ingredients', id='ingredients')
+            each ingredient, i in ingredients
+                input(type='checkbox', name='#{ingredient._id}', id='ingredient#{ingredient._id}')
+                label(for='ingredient#{ingredient._id}')
+                    | #{ingredient.name} ($#{ingredient.price})
+        input(type='submit')
+    script(src='/js/order/new.js')

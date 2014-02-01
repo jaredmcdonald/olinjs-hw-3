@@ -4,10 +4,11 @@
  */
 
 var express = require('express');
-var ingredient = require('./routes/ingredient');
 var http = require('http');
 var path = require('path');
-
+var models = require('./models');
+var ingredient = require('./routes/ingredient')(models);
+var order = require('./routes/order')(models);
 var app = express();
 
 // all environments
@@ -29,6 +30,11 @@ if ('development' == app.get('env')) {
 
 app.get('/ingredient/new', ingredient.new);
 app.post('/ingredient/create', ingredient.create);
+
+app.get('/order/new', order.new);
+app.post('/order/create', order.create);
+app.get('/orders', order.showOrders);
+app.post('/order/remove', order.remove);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
